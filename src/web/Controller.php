@@ -42,11 +42,11 @@ class Controller
             $trace = debug_backtrace();
             $controller = substr($trace[1]['class'], 0, -10);
             $action = substr($trace[1]['function'], 0, -6);
-            $tpl = $controller . '/' . $action;
+            $tpl = strtolower($controller) . '/' . $action;
         } elseif (strpos($tpl, '/') === false) {
             $trace = debug_backtrace();
             $controller = substr($trace[1]['class'], 0, -10);
-            $tpl = $controller . '/' . $tpl;
+            $tpl = strtolower($controller) . '/' . $tpl;
         }
         $this->_view->display($tpl);
     }
