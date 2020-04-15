@@ -63,11 +63,11 @@ class Core
         $pathMod = Common::C('PATH_MOD');
         $pathMod = empty($pathMod) ? 'NORMAL' : $pathMod;
         
-        if (strcmp(strtoupper($pathMod), 'NORMAL') === 0 || !isset($_SERVER['PATH_INFO'])) {
+        if (strcmp(strtoupper($pathMod), 'NORMAL') === 0 || !isset($_SERVER['REQUEST_URI'])) {
             $this->c = isset($_GET['c']) ? $_GET['c'] : 'site';
             $this->a = isset($_GET['a']) ? $_GET['a'] : 'index';
         } else {
-            $pathInfo = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
+            $pathInfo = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '';
             $pathInfoArr = explode('/', trim($pathInfo, '/'));
             
             if (isset($pathInfoArr[0]) && $pathInfoArr[0] !== '') {
