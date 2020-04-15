@@ -1,67 +1,63 @@
-# SinglePHP
+# Single PHP framework
 
-### 简介
+### 簡介
 
-SinglePHP是一个单文件PHP框架，适用于简单系统的快速开发，提供了简单的路由方式，抛弃了坑爹的PHP模板，采用原生PHP语法来渲染页面,同时提供了widget功能，简单且实用。
+此版本為 SinglePHP 的composer package版本
 
-目前SinglePHP由[leo108](http://leo108.com)开发维护，如果你希望参与到此项目中来，可以到[Github](https://github.com/leo108/SinglePHP)上Fork项目并提交Pull Request。
+### 文件
 
-### 文档
-
-中文: [http://leo108.github.io/SinglePHP/](http://leo108.github.io/SinglePHP/)
-
-English: [http://leo108.github.io/SinglePHP/en/](http://leo108.github.io/SinglePHP/en/) (Not Finished Yet)
+暫缺：
 
 ### Demo
 
-在线演示：[demo](http://singlephp.sinaapp.com)
+暫缺：
 
-### 目录结构
+### 目錄結構
 
-    ├── App                                 #业务代码文件夹，可在配置中指定路径
-    │   ├── Controller                      #控制器文件夹
-    │   │   └── IndexController.class.php
-    │   ├── Lib                             #外部库
-    │   ├── Log                             #日志文件夹，需要写权限
-    │   ├── View                            #模板文件夹
-    │   │   ├── Index                       #对应Index控制器
-    │   │   │   └── Index.php
-    │   │   └── Public
+    ├── app                                 #主程式
+    │   ├── controllers                     #controller文件
+    │   │   └── IndexController.php
+    │   ├── libs                            #外部函式庫
+    │   ├── views                           #樣版文件目錄
+    │   │   ├── site                        #對應Site Controller
+    │   │   │   └── index.php
+    │   │   └── layout
     │   │       ├── footer.php
     │   │       └── header.php
-    │   ├── Widget                          #widget文件夹
-    │   │   ├── MenuWidget.class.php
-    │   │   └── Tpl                         #widget模板文件夹
+    │   ├── widgets                         #widget目錄
+    │   │   ├── MenuWidget.php
+    │   │   └── tpl                         #widget樣版
     │   │       └── MenuWidget.php
-    │   └── common.php                      #一些共用函数
-    ├── SinglePHP.class.php                 #SinglePHP核心文件
-    └── index.php                           #入口文件
+    │   └── common.php                      #其他共用函数
+    ├── runtime/logs                        #log目錄，需要寫入權限
+    ├── vendor/irice/single-php/Core.php    #framework核心
+    └── public/index.php                    #入口程式
     
 ### Hello World
 
-只需增加3个文件，即可输出hello world。
-
-入口文件：index.php
+入口程式：public/index.php
 
     <?php
-    include './SinglePHP.class.php';         //包含核心文件
-    $config = array('APP_PATH' => './App/'); //指定业务目录为App
-    SinglePHP::getInstance($config)->run();  //撒丫子跑起来啦
+    require __DIR__ . '/../vendor/autoload.php';
+    $config = ['APP_PATH' => 'app'];
+    \single\Core::getInstance($config)->run();
     
-默认控制器：App/Controller/IndexController.class.php
+預設控制器：app/controllers/SiteController.php
 
     <?php
-    class IndexController extends Controller {       //控制器必须继承Controller类或其子类
-        public function IndexAction(){               //默认Action
-            $this->assign('content', 'Hello World'); //给模板变量赋值
-            $this->display();                        //渲染吧骚年
+    class IndexController extends Controller
+    {
+        public function indexAction()
+        {
+            $this->assign('content', 'Hello World');
+            $this->display('site/index');
         }
     }
     
-模板文件：App/View/Index/Index.php
+樣版文件：app/views/site/index.php
 
     <?php echo $content;
     
-在浏览器访问index.php，应该会输出
+進入index.php時會輸出
 
     Hello World
