@@ -19,11 +19,18 @@ class Log
     public static function write($msg, $level = 'DEBUG', $wf = false)
     {
         $msg = date('[ Y-m-d H:i:s ]') . "[{$level}]" . $msg . "\r\n";
-        $logPath = Common::C('APP_FULL_PATH') . '/Log/' . date('Ymd') . '.log';
-        if ($wf) {
-            $logPath .= '.wf';
+        $logPath = Common::C('APP_FULL_PATH') . '../runtime/log/';
+
+        if (!file_exists($logPath)) {
+            mkdir($logPath, 0755, true);
         }
-        file_put_contents($logPath, $msg, FILE_APPEND);
+
+        $filename = date('Ymd') . '.log';
+
+        if ($wf) {
+            $filename .= '.wf';
+        }
+        file_put_contents($logPath . $filename, $msg, FILE_APPEND);
     }
 
     /**
