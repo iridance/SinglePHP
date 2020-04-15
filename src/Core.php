@@ -59,35 +59,44 @@ class Core
         }
         Common::C('APP_FULL_PATH', getcwd() . '/' . Common::C('APP_PATH') . '/');
         Common::includeIfExist(Common::C('APP_FULL_PATH') . '/common.php');
+
         $pathMod = Common::C('PATH_MOD');
         $pathMod = empty($pathMod) ? 'NORMAL' : $pathMod;
         
         if (strcmp(strtoupper($pathMod), 'NORMAL') === 0 || !isset($_SERVER['PATH_INFO'])) {
-            $this->c = isset($_GET['c']) ? $_GET['c'] : 'Index';
-            $this->a = isset($_GET['a']) ? $_GET['a'] : 'Index';
+            $this->c = isset($_GET['c']) ? $_GET['c'] : 'site';
+            $this->a = isset($_GET['a']) ? $_GET['a'] : 'index';
         } else {
             $pathInfo = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '';
             $pathInfoArr = explode('/', trim($pathInfo, '/'));
+            
             if (isset($pathInfoArr[0]) && $pathInfoArr[0] !== '') {
                 $this->c = $pathInfoArr[0];
             } else {
-                $this->c = 'Index';
+                $this->c = 'site';
             }
+
             if (isset($pathInfoArr[1])) {
                 $this->a = $pathInfoArr[1];
             } else {
-                $this->a = 'Index';
+                $this->a = 'index';
             }
         }
-        if (!class_exists($this->c . 'Controller')) {
+
+        $controllerClass = ucfirst($this->c) . 'Controller';
+
+        if (!class_exists($controllerClass)) {
             Common::halt('控制器' . $this->c . '不存在');
         }
-        $controllerClass = $this->c . 'Controller';
+
         $controller = new $controllerClass();
-        if (!method_exists($controller, $this->a . 'Action')) {
+
+        $action = "{$this->a}Action";
+        if (!method_exists($controller, $action)) {
             Common::halt('方法' . $this->a . '不存在');
         }
-        call_user_func(array($controller, $this->a . 'Action'));
+
+        call_user_func([$controller, $action]);
     }
 
     /**
@@ -97,11 +106,11 @@ class Core
     public static function autoload($class)
     {
         if (substr($class, -10) == 'Controller') {
-            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/Controller/' . $class . '.class.php');
+            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/controllers/' . $class . '.php');
         } elseif (substr($class, -6) == 'Widget') {
-            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/Widget/' . $class . '.class.php');
+            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/widgets/' . $class . '.php');
         } else {
-            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/Lib/' . $class . '.class.php');
+            Common::includeIfExist(Common::C('APP_FULL_PATH') . '/libs/' . $class . '.php');
         }
     }
 }
