@@ -83,7 +83,7 @@ class Core
             }
         }
 
-        $controllerClass = ucfirst($this->c) . 'Controller';
+        $controllerClass = "app\\controllers\\" . ucfirst($this->c) . 'Controller';
 
         if (!class_exists($controllerClass)) {
             Common::halt('控制器' . $this->c . '不存在');
