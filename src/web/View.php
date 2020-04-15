@@ -36,7 +36,7 @@ class View
     public function __construct($tplDir = '')
     {
         if ($tplDir == '') {
-            $this->_tplDir = './' . Common::C('APP_PATH') . '/View/';
+            $this->_tplDir = './' . Common::C('APP_PATH') . '/views/';
         } else {
             $this->_tplDir = $tplDir;
         }
@@ -72,7 +72,7 @@ class View
     public static function tplInclude($path, $data = array())
     {
         self::$tmpData = array(
-            'path' => Common::C('APP_FULL_PATH') . '/View/' . $path . '.php',
+            'path' => Common::C('APP_FULL_PATH') . '/views/' . $path . '.php',
             'data' => $data,
         );
         unset($path);
