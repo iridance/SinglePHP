@@ -1,0 +1,19 @@
+{
+    "name": "irice/single-php",
+    "description": "Upgrade to composer version from legacy php",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "irice",
+            "email": "sgetaplus@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "single\\": "src"
+        }
+    }
+}
