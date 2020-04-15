@@ -36,7 +36,7 @@ class View
     public function __construct($tplDir = '')
     {
         if ($tplDir == '') {
-            $this->_tplDir = './' . Common::C('APP_PATH') . '/views/';
+            $this->_tplDir = Common::C('APP_PATH') . '/views/';
         } else {
             $this->_tplDir = $tplDir;
         }
