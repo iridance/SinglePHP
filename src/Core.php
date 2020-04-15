@@ -61,7 +61,7 @@ class Core
         Common::includeIfExist(Common::C('APP_FULL_PATH') . '/common.php');
         $pathMod = Common::C('PATH_MOD');
         $pathMod = empty($pathMod) ? 'NORMAL' : $pathMod;
-        spl_autoload_register(array('SinglePHP', 'autoload'));
+        
         if (strcmp(strtoupper($pathMod), 'NORMAL') === 0 || !isset($_SERVER['PATH_INFO'])) {
             $this->c = isset($_GET['c']) ? $_GET['c'] : 'Index';
             $this->a = isset($_GET['a']) ? $_GET['a'] : 'Index';
