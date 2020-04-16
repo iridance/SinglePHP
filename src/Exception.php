@@ -1,6 +1,6 @@
 <?php
 
-namespace single;
+namespace Single;
 
 /**
  * ExtException类，记录额外的异常信息

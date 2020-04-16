@@ -1,8 +1,6 @@
 <?php
 
-namespace single\web;
-
-use single\Common;
+namespace Single\Web;
 
 /**
  * 视图类
@@ -36,7 +34,7 @@ class View
     public function __construct($tplDir = '')
     {
         if ($tplDir == '') {
-            $this->_tplDir = Common::C('APP_PATH') . '/views/';
+            $this->_tplDir = C('APP_PATH') . '/views/';
         } else {
             $this->_tplDir = $tplDir;
         }
@@ -72,7 +70,7 @@ class View
     public static function tplInclude($path, $data = array())
     {
         self::$tmpData = array(
-            'path' => Common::C('APP_FULL_PATH') . '/views/' . $path . '.php',
+            'path' => C('APP_FULL_PATH') . '/views/' . $path . '.php',
             'data' => $data,
         );
         unset($path);

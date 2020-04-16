@@ -1,8 +1,8 @@
 <?php
 
-namespace single;
+namespace Single;
 
-use single\web\View;
+use Single\Web\View;
 
 /**
  * Widget类
@@ -27,7 +27,7 @@ class Widget
     public function __construct()
     {
         $this->_widgetName = get_class($this);
-        $dir = Common::C('APP_FULL_PATH') . '/Widget/Tpl/';
+        $dir = C('APP_FULL_PATH') . '/Widget/Tpl/';
         $this->_view = new View($dir);
     }
 

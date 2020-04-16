@@ -1,6 +1,6 @@
 <?php
 
-namespace single;
+namespace Single;
 
 /**
  * 日志类
@@ -19,7 +19,7 @@ class Log
     public static function write($msg, $level = 'DEBUG', $wf = false)
     {
         $msg = date('[ Y-m-d H:i:s ]') . "[{$level}]" . $msg . "\r\n";
-        $logPath = Common::C('APP_FULL_PATH') . '../runtime/log/';
+        $logPath = C('APP_FULL_PATH') . '../runtime/log/';
 
         if (!file_exists($logPath)) {
             mkdir($logPath, 0755, true);

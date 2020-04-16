@@ -1,6 +1,6 @@
 <?php
 
-namespace single;
+namespace Single;
 
 use PDO;
 
@@ -56,7 +56,7 @@ class Db
 
         $this->_db = new PDO("mysql:dbname={$dbConf['DB_NAME']};host={$dbConf['DB_HOST']};port={$dbConf['DB_PORT']};charset={$dbConf['DB_CHARSET']}", $dbConf['DB_USER'], $dbConf['DB_PASS']);
         if ($this->_db === false) {
-            Common::halt(implode(' - ', $this->_db->errorInfo()));
+            halt(implode(' - ', $this->_db->errorInfo()));
         }
     }
 

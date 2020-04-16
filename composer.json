@@ -1,5 +1,5 @@
 {
-    "name": "irice/single-php",
+    "name": "single/framework",
     "description": "Upgrade to composer version from legacy php",
     "type": "project",
     "license": "MIT",
@@ -12,8 +12,11 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload": {
+        "files": [
+            "Single/Helpers.php"
+        ],
         "psr-4": {
-            "single\\": "src"
+            "Single\\": "src"
         }
     }
 }

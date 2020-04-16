@@ -1,6 +1,6 @@
 <?php
 
-namespace single\web;
+namespace Single\Web;
 
 /**
  * 控制器类
